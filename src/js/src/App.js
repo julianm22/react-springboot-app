@@ -1,19 +1,73 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {getAllStudents} from './client';
 
-class App extends Component {
-  render() {
-    getAllStudents().then(res => res.json().then(students => {
-      console.log(students);
-    }));
+import {Table} from 'antd';
 
-    return (
-      <div className="App">
-        <h1>Hello World Spring Boot & React</h1>
-      </div>
-    );
+class App extends Component {
+
+  state = {
+    students: []
+  }
+
+  componentDidMount() {
+    this.fetchStudents();
+  }
+
+  fetchStudents = () => {
+    getAllStudents()
+      .then(res => res.json()
+      .then(students => {
+        console.log(students);
+        this.setState({
+          students
+        });
+      }));
+  }
+
+  render() {
+
+    const {students} = this.state;
+
+    if(students && students.length) {
+      
+      const columns =  [
+        {
+          title: 'Student Id',
+          dataIndex: 'studentId',
+          key: 'studentId'
+        },
+        {
+          title: 'First Name',
+          dataIndex: 'firstName',
+          key: 'firstName'
+        },
+        {
+          title: 'Last Name',
+          dataIndex: 'lastName',
+          key: 'lastName'
+        },
+        {
+          title: 'Email',
+          dataIndex: 'email',
+          key: 'email'
+        },
+        {
+          title: 'Gender',
+          dataIndex: 'gender',
+          key: 'gender'
+        }
+      ];
+
+      return (
+        <Table 
+        dataSource={students} 
+        columns={columns} 
+        rowKey='studentId' />
+      );
+    }
+
+    return <h1>No students found</h1>
   }
 }
 
