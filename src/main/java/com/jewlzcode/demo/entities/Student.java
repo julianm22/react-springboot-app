@@ -1,5 +1,7 @@
 package com.jewlzcode.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +21,11 @@ public class Student {
 
     public Student() {};
 
-    public Student(long studentId, String firstName, String lastName, String email, String gender) {
+    public Student(@JsonProperty("studentId") long studentId,
+                   @JsonProperty("firstName") String firstName,
+                   @JsonProperty("lastName") String lastName,
+                   @JsonProperty("email") String email,
+                   @JsonProperty("gender") String gender) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,7 +43,18 @@ public class Student {
 
     public String getGender() { return gender; }
 
-//    enum Gender {
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                '}';
+    }
+
+    //    enum Gender {
 //        MALE, FEMALE
 //    }
 }
