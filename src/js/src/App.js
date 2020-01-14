@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Container from './Container';
 import Footer from './Footer/Footer';
+import AddStudentForm from './forms/AddStudentForm';
 import './App.css';
 import {getAllStudents} from './client';
 
@@ -105,7 +106,7 @@ class App extends Component {
               onOk={this.closeAddStudentModalVisible} 
               onCancel={this.closeAddStudentModalVisible} 
               width={1000} >
-                <h1>Hello Modal with Antd</h1>
+                <AddStudentForm />
             </Modal>
             <Footer 
               numberOfStudents={students.length}
