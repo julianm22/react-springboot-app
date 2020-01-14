@@ -2,6 +2,7 @@ package com.jewlzcode.demo.controllers;
 
 import com.jewlzcode.demo.dao.StudentRepository;
 import com.jewlzcode.demo.entities.Student;
+import com.jewlzcode.demo.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,11 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    StudentRepository studRepo;
+    StudentService studentService;
 
     @GetMapping
     List<Student> getAllStudents() {
-        return studRepo.findAll();
+        return studentService.getAllStudents();
     }
 
 }
